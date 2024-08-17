@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import { ActivatedRoute }  from "@angular/router";
 import { HousingService } from "../core/housing.service";
 import {HouseLocation} from "../models/house-location";
@@ -19,9 +19,9 @@ export class DetailsComponent {
 
   constructor(){
    const housingLocationId = Number(this.route.snapshot.params['id']);
-  console.log(housingLocationId);
-  this.housingLocation = this.housingService.getHousingLocationById(housingLocationId);
 
+  this.housingLocation = this.housingService.getHousingLocationById(housingLocationId);
+    console.log(this.housingLocation);
   }
 
 }

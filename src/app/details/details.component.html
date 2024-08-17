@@ -1,4 +1,21 @@
+<article>
 
-{{housingLocation?.id}}
-<p *ngIf="housingLocation?.wifi === true">Wife YES</p>
+  <img alt='photo' class="listing-photo" [src]="housingLocation?.photo">
+  <section class="listing-description">
+    <h2 class="listing-heading">{{housingLocation?.name}}</h2>
+    <p class="listing-location">{{housingLocation?.city}} {{housingLocation?.state}}</p>
+  </section>
+  <section class="listing-features">
+    <h2 class="section-heading">About this location</h2>
+    <ul>
+      <li>Wifi: {{ housingLocation?.wifi }}</li>
+      <li>Laundry: {{housingLocation?.laundry}}</li>
+      <li>Available Units: {{ housingLocation?.availableUnits }}</li>
+    </ul>
+  </section>
+  <section class="listing-apply">
+    <h2 class="section-heading"> Apply to live here</h2>
+    <button class="primary" type="button"> Apply now</button>
+  </section>
 
+</article>
