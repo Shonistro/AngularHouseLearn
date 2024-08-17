@@ -1,0 +1,12 @@
+<section>
+  <form>
+    <input placeholder="Search house..." type="text">
+    <button class="primary" type="button">Search</button>
+  </form>
+</section>
+<section class="results">
+  <app-house-location *ngFor="let locationItem of housingLocationList" [houseLocation]="locationItem">  </app-house-location>
+
+</section>
+
+
