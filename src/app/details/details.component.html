@@ -17,28 +17,27 @@
     <h2 class="section-heading"> Apply to live here</h2>
       <form [formGroup]="applyForm" (ngSubmit)="submitApplication()">
         <label for="first-name">First Name</label>
-        <input id="first-name" placeholder="Enter name" type="text" formControlName="firstName">
-        <div *ngIf="applyForm.get('firstName')?.invalid && (applyForm.get('firstName')?.dirty || applyForm.get('firstName')?.touched)">
-          <small *ngIf="applyForm.get('firstName')?.errors?.['required']"> This field required</small>
-          <small *ngIf="applyForm.get('firstName')?.errors?.['minlength']" >Need more Symbol</small>
+        <input id="first-name" placeholder="Enter name" type="text" formControlName="firstName" (blur)="isFormValid('firstName')">
+        <div *ngIf="isFormValid('firstName')">
+          <small *ngFor="let error of isFormErrors('firstName')">{{error}}</small>
         </div>
-
-
 
         <label for="last-name"> Last Name</label>
         <input id="last-name" type="text" placeholder="Enter last name" formControlName="lastName">
-        <div *ngIf="applyForm.get('lastName')?.invalid && (applyForm.get('lastName')?.dirty || applyForm.get('lastName')?.touched)">
-        <small *ngIf="applyForm.get('lastName')?.errors?.['required']"> Last name is required</small>
-        <small *ngIf="applyForm.get('lastName')?.errors?.['minlength']">Last name min 5 simbol</small>
-       </div>
-        <label for="email">Email</label>
-        <input id="email" type="text"  formControlName="email" placeholder="Enter email">
-        <div *ngIf="applyForm.get('email')?.invalid && (applyForm.get('email')?.dirty || applyForm.get('email')?.touched)">
-          <small *ngIf="applyForm.get('email')?.errors?.['required']">Required </small>
-          <small *ngIf="applyForm.get('email')?.errors?.['email']">Bad Formats</small>
+        <div *ngIf="isFormValid('lastName')">
+          <small *ngFor="let error of isFormErrors('lastName')">{{error}}</small>
+
         </div>
 
-        <button type="submit" class="primary" [disabled]="!applyForm.valid"> Submit </button>
+
+        <label for="email">Email</label>
+        <input id="email" type="text"  formControlName="email" placeholder="Enter email">
+        <div *ngIf="applyForm.get('email')!.invalid &&  (applyForm.get('email')!.dirty || applyForm.get('email')!.touched)">
+          <small *ngIf="applyForm.get('email')?.errors?.['required']">Field Is required</small>
+          <small *ngIf="applyForm!.get('email')?.errors?.['email']">Bad Format Email</small>
+        </div>
+
+        <button type="submit" class="primary" [disabled]="applyForm.valid"> Submit </button>
       </form>
   </section>
 

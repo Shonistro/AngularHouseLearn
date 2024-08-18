@@ -18,8 +18,31 @@ export class DetailsComponent {
   housingService = inject(HousingService);
   housingLocation: HouseLocation | undefined;
 
+  isFormValid(fieldName: string) {
+    const field = this.applyForm.get(fieldName);
 
+    return field!.invalid && (field!.dirty || field!.touched)
+  }
 
+  isFormErrors(fieldName: string): string[] {
+    const errors:string[] = [];
+    const field = this.applyForm.get(fieldName);
+
+    if (field!.errors?.['required']) {
+      errors.push(`${fieldName} field is required `)
+    }
+    if (field!.errors?.['minlength']) {
+      errors.push(`${fieldName} min length field < 5`)
+    }
+    if(field!.errors?.['email']){
+      errors.push(`${fieldName} email format not valid`)
+    }
+
+    console.log(errors)
+
+    return errors
+
+  }
 
 
   applyForm = new FormGroup({
