@@ -13,10 +13,27 @@ import {HousingService} from "../core/housing.service"
 })
 export class HomeComponent {
   housingLocationList: HouseLocation[] = [];
-
   housingService: HousingService = inject(HousingService)
+  filteredLocationList: HouseLocation[] = [];
+
 
   constructor(){
-    this.housingLocationList = this.housingService.getAllHousingLocations()
+     this.housingService.getAllHousingLocations().then((housingLocationList: HouseLocation[] ) =>{
+       this.housingLocationList = housingLocationList;
+       this.filteredLocationList = housingLocationList;
+     })
   }
+
+
+  filteredResult(text:string){
+    if(!text) this.filteredLocationList = this.housingLocationList
+
+
+    this.filteredLocationList = this.housingLocationList.filter(
+      housingLocation => housingLocation.city.toLowerCase().includes(text.toLowerCase())
+    )
+
+  }
+
+
 }

@@ -8,8 +8,8 @@
   <section class="listing-features">
     <h2 class="section-heading">About this location</h2>
     <ul>
-      <li>Wifi: {{ housingLocation?.wifi }}</li>
-      <li>Laundry: {{housingLocation?.laundry}}</li>
+      <li>Wifi: {{housingLocation?.wifi ? 'Yes' : 'No'}} </li>
+      <li>Laundry: {{housingLocation?.laundry ? 'Yes' : 'No'}}</li>
       <li>Available Units: {{ housingLocation?.availableUnits }}</li>
     </ul>
   </section>
@@ -21,20 +21,18 @@
         <div *ngIf="isFormValid('firstName')">
           <small *ngFor="let error of isFormErrors('firstName')">{{error}}</small>
         </div>
-
         <label for="last-name"> Last Name</label>
         <input id="last-name" type="text" placeholder="Enter last name" formControlName="lastName">
         <div *ngIf="isFormValid('lastName')">
           <small *ngFor="let error of isFormErrors('lastName')">{{error}}</small>
-
         </div>
 
 
         <label for="email">Email</label>
         <input id="email" type="text"  formControlName="email" placeholder="Enter email">
         <div *ngIf="applyForm.get('email')!.invalid &&  (applyForm.get('email')!.dirty || applyForm.get('email')!.touched)">
-          <small *ngIf="applyForm.get('email')?.errors?.['required']">Field Is required</small>
-          <small *ngIf="applyForm!.get('email')?.errors?.['email']">Bad Format Email</small>
+            <small *ngIf="applyForm.get('email')?.errors?.['required']">Field Is required</small>
+            <small *ngIf="applyForm!.get('email')?.errors?.['email']">Bad Format Email</small>
         </div>
 
         <button type="submit" class="primary" [disabled]="applyForm.valid"> Submit </button>
